@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking Analytics Dashboard | Client Analysis & Insights</title>
+  <meta name="description" content="Interactive analytics dashboard analyzing 3,000+ banking clients across demographics, financials, risk profiles, and customer segments.">
+  <meta property="og:title" content="Banking Analytics Dashboard">
+  <meta property="og:description" content="Comprehensive analysis of banking client data with interactive visualizations.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="nav-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="url(#navGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <defs><linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs>
+        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+      </svg>
+      Banking Analytics
+    </div>
+    <ul class="nav-links">
+      <li><a href="#kpi-section">Overview</a></li>
+      <li><a href="#demographics-section">Demographics</a></li>
+      <li><a href="#financials-section">Financials</a></li>
+      <li><a href="#correlations-section">Correlations</a></li>
+      <li><a href="#segments-section">Segments</a></li>
+      <li><a href="#insights-section">Insights</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header id="hero">
+    <h1>Banking Client Analytics</h1>
+    <p>Comprehensive analysis of 3,000+ banking clients across demographics, financials, and risk profiles</p>
+  </header>
+
+  <!-- KPI CARDS -->
+  <section id="kpi-section">
+    <div class="kpi-grid">
+      <div class="kpi-card glass-card fade-in" id="kpi-clients" style="--kpi-color: #3B82F6">
+        <div class="kpi-icon">👥</div>
+        <div class="kpi-value" data-target="0" data-format="number">0</div>
+        <div class="kpi-label">Total Clients</div>
+      </div>
+      <div class="kpi-card glass-card fade-in" id="kpi-income" style="--kpi-color: #10B981">
+        <div class="kpi-icon">💰</div>
+        <div class="kpi-value" data-target="0" data-format="currency-k">$0</div>
+        <div class="kpi-label">Avg. Income</div>
+      </div>
+      <div class="kpi-card glass-card fade-in" id="kpi-loans" style="--kpi-color: #F59E0B">
+        <div class="kpi-icon">🏦</div>
+        <div class="kpi-value" data-target="0" data-format="currency-b">$0</div>
+        <div class="kpi-label">Total Bank Loans</div>
+      </div>
+      <div class="kpi-card glass-card fade-in" id="kpi-deposits" style="--kpi-color: #06B6D4">
+        <div class="kpi-icon">📈</div>
+        <div class="kpi-value" data-target="0" data-format="currency-b">$0</div>
+        <div class="kpi-label">Total Deposits</div>
+      </div>
+      <div class="kpi-card glass-card fade-in" id="kpi-risk" style="--kpi-color: #8B5CF6">
+        <div class="kpi-icon">⚡</div>
+        <div class="kpi-value" data-target="0" data-format="decimal">0</div>
+        <div class="kpi-label">Avg. Risk Score</div>
+      </div>
+      <div class="kpi-card glass-card fade-in" id="kpi-lending" style="--kpi-color: #EC4899">
+        <div class="kpi-icon">🏢</div>
+        <div class="kpi-value" data-target="0" data-format="currency-b">$0</div>
+        <div class="kpi-label">Total Business Lending</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <section id="filters-section">
+    <div class="filters-bar glass-card container">
+      <div class="filter-group">
+        <label for="filter-nationality">Nationality</label>
+        <select id="filter-nationality"><option value="all">All Nationalities</option><option value="European">European</option><option value="Asian">Asian</option><option value="American">American</option><option value="Australian">Australian</option><option value="African">African</option></select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-gender">Gender</label>
+        <select id="filter-gender"><option value="all">All Genders</option><option value="Male">Male</option><option value="Female">Female</option></select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-loyalty">Loyalty Tier</label>
+        <select id="filter-loyalty"><option value="all">All Loyalty Tiers</option><option value="Jade">Jade</option><option value="Silver">Silver</option><option value="Gold">Gold</option><option value="Platinum">Platinum</option></select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-fee">Fee Structure</label>
+        <select id="filter-fee"><option value="all">All Fee Structures</option><option value="High">High</option><option value="Mid">Mid</option><option value="Low">Low</option></select>
+      </div>
+      <button id="filter-reset">Reset Filters</button>
+    </div>
+  </section>
+
+  <!-- DEMOGRAPHICS -->
+  <section id="demographics-section">
+    <h2 class="section-title fade-in">Demographics Overview</h2>
+    <div class="chart-grid three-cols">
+      <div class="chart-card glass-card fade-in"><h3>Age Distribution</h3><div class="chart-container"><canvas id="chart-age"></canvas></div></div>
+      <div class="chart-card glass-card fade-in"><h3>Nationality Breakdown</h3><div class="chart-container"><canvas id="chart-nationality"></canvas></div></div>
+      <div class="chart-card glass-card fade-in"><h3>Gender Split</h3><div class="chart-container"><canvas id="chart-gender"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- FINANCIALS -->
+  <section id="financials-section">
+    <h2 class="section-title fade-in">Financial Analysis</h2>
+    <div class="chart-grid two-cols">
+      <div class="chart-card glass-card fade-in"><h3>Income Distribution</h3><div class="chart-container"><canvas id="chart-income"></canvas></div></div>
+      <div class="chart-card glass-card fade-in"><h3>Deposits vs Savings</h3><div class="chart-container"><canvas id="chart-scatter"></canvas></div></div>
+    </div>
+    <div class="chart-grid two-cols">
+      <div class="chart-card glass-card fade-in"><h3>Avg Financial Metrics by Nationality</h3><div class="chart-container"><canvas id="chart-fin-nationality"></canvas></div></div>
+      <div class="chart-card glass-card fade-in"><h3>Avg Financial Metrics by Loyalty Tier</h3><div class="chart-container"><canvas id="chart-fin-loyalty"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- CORRELATIONS -->
+  <section id="correlations-section">
+    <h2 class="section-title fade-in">Feature Correlations</h2>
+    <div class="chart-card glass-card correlation-card fade-in" style="margin: 0 2rem; max-width: calc(1280px - 4rem); margin-left: auto; margin-right: auto;">
+      <h3>Correlation Matrix — Numerical Features</h3>
+      <div id="heatmap-container"></div>
+    </div>
+  </section>
+
+  <!-- SEGMENTS -->
+  <section id="segments-section">
+    <h2 class="section-title fade-in">Customer Segments</h2>
+    <div class="chart-grid three-cols">
+      <div class="chart-card glass-card fade-in"><h3>Loyalty Classification</h3><div class="chart-container"><canvas id="chart-loyalty"></canvas></div></div>
+      <div class="chart-card glass-card fade-in"><h3>Fee Structure</h3><div class="chart-container"><canvas id="chart-fee"></canvas></div></div>
+      <div class="chart-card glass-card fade-in"><h3>Risk Distribution</h3><div class="chart-container"><canvas id="chart-risk"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section id="insights-section">
+    <h2 class="section-title fade-in">Key Insights</h2>
+    <div class="insights-grid">
+      <div class="insight-card glass-card fade-in">
+        <div class="insight-icon">💰</div>
+        <h3>Deposits & Savings Correlation</h3>
+        <p>High correlation between Bank Deposits and Saving Accounts indicates overlapping financial behavior — customers who actively deposit also grow savings proportionally.</p>
+      </div>
+      <div class="insight-card glass-card fade-in">
+        <div class="insight-icon">📈</div>
+        <h3>Income-Age Lifecycle</h3>
+        <p>Moderate correlations of Age and Income with balances reflect common lifecycle trends — higher earners and older individuals accumulate more across all account types.</p>
+      </div>
+      <div class="insight-card glass-card fade-in">
+        <div class="insight-icon">🏠</div>
+        <h3>Properties Independence</h3>
+        <p>Property ownership shows low correlation with banking variables, driven by external factors like location, market conditions, and inheritance rather than banking activity.</p>
+      </div>
+      <div class="insight-card glass-card fade-in">
+        <div class="insight-icon">🏢</div>
+        <h3>Business vs Personal</h3>
+        <p>Business Lending is moderately linked to Bank Loans but uncorrelated with deposits, indicating it serves a distinct customer segment with different financial needs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <p>Banking Analytics Dashboard • Built with Chart.js & Vanilla JS</p>
+    <p>Data: 3,000 Client Records • 25 Features • Star Schema</p>
+    <div class="footer-badges">
+      <span class="badge">📊 Chart.js</span>
+      <span class="badge">🎨 CSS3</span>
+      <span class="badge">⚡ JavaScript</span>
+      <span class="badge">🐍 Python</span>
+      <span class="badge">📋 Pandas</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
